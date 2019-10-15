@@ -2,7 +2,8 @@
   "name": "codex-tooltip",
   "version": "1.0.0",
   "description": "Simple tooltips module",
-  "main": "index.js",
+  "main": "./dist/tooltip.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build:dev": "webpack --mode development --progress --display-error-details --display-entrypoints --watch",
     "build:prod": "webpack --mode production"
@@ -14,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "..."
+    "url": "git+https://github.com/codex-team/codex.tooltips"
   },
   "bugs": {
-    "url": "..."
+    "url": "https://github.com/codex-team/codex.tooltips/issues"
   },
-  "homepage": "...",
+  "homepage": "https://github.com/codex-team/codex.tooltips",
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-transform-runtime": "^7.3.4",

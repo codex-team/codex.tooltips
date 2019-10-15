@@ -1,6 +1,8 @@
 /**
  * Module description
  */
+import {TooltipContent, TooltipOptions} from '../index';
+
 class Tooltip {
   /**
    * Tooltip CSS classes
@@ -36,25 +38,45 @@ class Tooltip {
    * Show tooltip for toolbox button
    *
    * @param {HTMLElement} element
-   * @param {HTMLElement} content
+   * @param {TooltipContent} content
+   * @param {TooltipOptions} options
    */
-  public show(element: HTMLElement, content: HTMLElement | Node): void {
+  public show(element: HTMLElement, content: TooltipContent, options: TooltipOptions): void {
     if (!this.nodes.wrapper) {
       this.prepare();
     }
 
+    const tooltipOptions = options || {
+      position: 'bottom',
+    };
+
     const elementCoords = element.getBoundingClientRect();
+    const offsetY = -15;
 
-    this.nodes.wrapper.innerHTML = '';
-    this.nodes.wrapper.appendChild(content);
+    this.nodes.content.innerHTML = '';
+    this.nodes.content.appendChild(content);
 
-    this.nodes.wrapper.style.left = `${elementCoords.left + element.clientWidth / 2}px`;
-    this.nodes.wrapper.style.transform = `translate3d(-50%, ${elementCoords.bottom + window.pageYOffset}px, 0)`;
+    switch (tooltipOptions.position) {
+      case 'top':
+        console.log('here');
+        break;
+
+      case 'bottom':
+      default:
+        const tooltipPosition = {
+          left: elementCoords.left + element.clientWidth / 2,
+          top: elementCoords.bottom + window.pageYOffset + offsetY,
+        };
+
+        this.nodes.wrapper.style.left = `${tooltipPosition.left}px`;
+        this.nodes.wrapper.style.transform = `translate3d(-50%, ${tooltipPosition.top}px, 0)`;
+        break;
+    }
     this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
   }
 
   /**
-   * Hide toolbox tooltip
+   * Hide toolbox tooltip and clean content
    */
   public hide(): void {
     this.nodes.wrapper.classList.remove(this.CSS.tooltipShown);
@@ -64,15 +86,10 @@ class Tooltip {
    * Module Preparation method
    */
   private prepare() {
-    this.nodes.wrapper = this.make('div', this.CSS.tooltip, {
-      innerHTML: '',
-    });
+    this.nodes.wrapper = this.make('div', this.CSS.tooltip);
+    this.nodes.content = this.make('div', this.CSS.tooltipContent);
 
-    // this.nodes.content = this.make('div', this.CSS.tooltipContent, {
-    //   innerHTML: '',
-    // });
-
-    // this.append(this.nodes.wrapper, this.nodes.content);
+    this.append(this.nodes.wrapper, this.nodes.content);
     this.append(document.body, this.nodes.wrapper);
   }
 

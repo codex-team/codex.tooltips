@@ -4,24 +4,28 @@
 
 .ce-tooltip {
   position: absolute;
+  z-index: 999;
   top: 25px;
-  padding: 6px 10px;
   border-radius: 5px;
   opacity: 0;
   background: var(--bg-color);
   box-shadow: 0 10px 12px -9px rgba(26, 39, 54, 0.32), 0 3px 2px -2px rgba(33, 48, 73, 0.05);
-  color: #5C6174;
-  font-size: 12px;
-  text-align: center;
   user-select: none;
   pointer-events: none;
   transition: opacity 150ms ease-in, left 0.1s linear;
   will-change: opacity, left;
-  letter-spacing: 0.02em;
-  line-height: 1em;
 
   @media (--mobile) {
     display: none;
+  }
+
+  &__content {
+    padding: 6px 10px;
+    color: #5C6174;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    line-height: 1em;
   }
 
   &--shown {
