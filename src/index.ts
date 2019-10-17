@@ -4,6 +4,7 @@
 import {TooltipContent, TooltipOptions} from '../index';
 
 class Tooltip {
+
   /**
    * Tooltip CSS classes
    */
@@ -27,6 +28,11 @@ class Tooltip {
   };
 
   /**
+   * tooltip top offset
+   */
+  private offsetTop: number = -15;
+
+  /**
    * Module constructor
    */
   constructor() {
@@ -39,33 +45,37 @@ class Tooltip {
    *
    * @param {HTMLElement} element
    * @param {TooltipContent} content
-   * @param {TooltipOptions} options
+   * @param {TooltipOptions} customOptions
    */
-  public show(element: HTMLElement, content: TooltipContent, options: TooltipOptions): void {
+  public show(element: HTMLElement, content: TooltipContent, customOptions: TooltipOptions): void {
     if (!this.nodes.wrapper) {
       this.prepare();
     }
 
-    const tooltipOptions = options || {
-      position: 'bottom',
-    };
-
     const elementCoords = element.getBoundingClientRect();
-    const offsetY = -15;
+    const basicOptions = {
+      position: 'bottom',
+      marginTop: 0,
+      marginLeft: 0,
+      marginRight: 0,
+      marginBottom: 0,
+    };
+    const showingOptions = Object.assign(basicOptions, customOptions);
 
     this.nodes.content.innerHTML = '';
     this.nodes.content.appendChild(content);
 
-    switch (tooltipOptions.position) {
+    switch (showingOptions.position) {
       case 'top':
-        console.log('here');
+      case 'left':
+      case 'right':
         break;
 
       case 'bottom':
       default:
         const tooltipPosition = {
           left: elementCoords.left + element.clientWidth / 2,
-          top: elementCoords.bottom + window.pageYOffset + offsetY,
+          top: elementCoords.bottom + window.pageYOffset + this.offsetTop + showingOptions.marginTop,
         };
 
         this.nodes.wrapper.style.left = `${tooltipPosition.left}px`;

@@ -2,7 +2,30 @@
  * Base options interface for tooltips
  */
 export interface TooltipOptions {
-  position: string;
+  /**
+   * Tooltip position: top|bottom|left|right
+   */
+  position?: string;
+
+  /**
+   * Tooltip top margin
+   */
+  marginTop?: number;
+
+  /**
+   * Tooltip left margin
+   */
+  marginLeft?: number;
+
+  /**
+   * Tooltip right margin
+   */
+  marginRight?: number;
+
+  /**
+   * Tooltip bottom margin
+   */
+  marginBottom?: number;
 }
 
 /**
