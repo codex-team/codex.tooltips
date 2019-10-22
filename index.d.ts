@@ -3,9 +3,9 @@
  */
 export interface TooltipOptions {
   /**
-   * Tooltip position: top|bottom|left|right
+   * Tooltip placement: top|bottom|left|right
    */
-  position?: string;
+  placement?: string;
 
   /**
    * Tooltip top margin

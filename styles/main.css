@@ -38,12 +38,39 @@
     width: 10px;
     height: 10px;
     position: absolute;
-    top: -5px;
-    left: 50%;
-    margin-left: -5px;
-    transform: rotate(-45deg);
     background-color: var(--bg-color);
     z-index: -1;
   }
-}
 
+  &--placement-left {
+    &::before {
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%) rotate(-45deg);
+     }
+  }
+
+  &--placement-bottom {
+    &::before {
+      top: -5px;
+      left: 50%;
+      transform: rotate(-45deg);
+     }
+  }
+
+  &--placement-top {
+    &::before {
+      top: 100%;
+      left: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
+
+  &--placement-right {
+    &::before {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
+}
