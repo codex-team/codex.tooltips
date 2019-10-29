@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
 
   return {
     entry: {
-      'tooltip': ['@babel/polyfill/noConflict', './src/index.ts']
+      'tooltip': ['./src/index.ts']
     },
 
     output: {
@@ -56,7 +56,7 @@ module.exports = (env, argv) => {
       }),
 
       new webpack.BannerPlugin({
-        banner: `Editor.js\n\n@version ${VERSION}\n\n@licence Apache-2.0\n@author CodeX <https://codex.so>\n\n`
+        banner: `CodeX.Tooltips\n\n@version ${VERSION}\n\n@licence Apache-2.0\n@author CodeX <https://codex.so>\n\n`
       }),
 
       new LicenseWebpackPlugin()
