@@ -1,19 +1,34 @@
 :root {
-  --bg-color: #eff2f5;
+  --ct-color-bg: #1D202B;
+  --ct-color-font: #CDD1E0;
 }
 
 .ce-tooltip {
   position: absolute;
   z-index: 999;
   top: 25px;
-  border-radius: 5px;
+  border-radius: 9px;
   opacity: 0;
-  background: var(--bg-color);
-  box-shadow: 0 10px 12px -9px rgba(26, 39, 54, 0.32), 0 3px 2px -2px rgba(33, 48, 73, 0.05);
+  background: var(--ct-color-bg);
+  box-shadow: 0 4px 5px -3px rgba(5,6,12,0.49), 0 8px 12px 0 rgba(29,32,43,0.17);
   user-select: none;
   pointer-events: none;
-  transition: opacity 150ms ease-in, left 0.1s linear;
+  transition: opacity 140ms ease-in, left 90ms ease;
   will-change: opacity, left;
+
+  background: #1D202B;
+
+  &::before {
+    content: '';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background-color: var(--ct-color-bg);
+    -webkit-mask-box-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M10.71 0h2.58c3.02 0 4.64.42 6.1 1.2a8.18 8.18 0 013.4 3.4C23.6 6.07 24 7.7 24 10.71v2.58c0 3.02-.42 4.64-1.2 6.1a8.18 8.18 0 01-3.4 3.4c-1.47.8-3.1 1.21-6.11 1.21H10.7c-3.02 0-4.64-.42-6.1-1.2a8.18 8.18 0 01-3.4-3.4C.4 17.93 0 16.3 0 13.29V10.7c0-3.02.42-4.64 1.2-6.1a8.18 8.18 0 013.4-3.4C6.07.4 7.7 0 10.71 0z" fill="#000" fill-rule="nonzero"/></svg>') 48% 41% 37.9% 53.3%;
+    z-index: -1;
+  }
 
   @media (--mobile) {
     display: none;
@@ -21,7 +36,7 @@
 
   &__content {
     padding: 6px 10px;
-    color: #5C6174;
+    color: var(--ct-color-font);
     font-size: 12px;
     text-align: center;
     letter-spacing: 0.02em;
@@ -33,17 +48,17 @@
     transition-delay: 0.1s, 0s;
   }
 
-  &::before {
+  &::after {
     content: '';
     width: 10px;
     height: 10px;
     position: absolute;
-    background-color: var(--bg-color);
+    background-color: var(--ct-color-bg);
     z-index: -1;
   }
 
   &--placement-left {
-    &::before {
+    &::after {
       top: 50%;
       left: 100%;
       transform: translateY(-50%) rotate(-45deg);
@@ -51,26 +66,26 @@
   }
 
   &--placement-bottom {
-    &::before {
+    &::after {
       top: -5px;
       left: 50%;
-      transform: rotate(-45deg);
+      transform: translateX(-50%) rotate(-45deg);
      }
   }
 
   &--placement-top {
-    &::before {
+    &::after {
       top: 100%;
       left: 50%;
-      transform: translateY(-50%) rotate(-45deg);
+      transform: translateX(-50%) rotate(-45deg);
     }
   }
 
   &--placement-right {
-    &::before {
+    &::after {
       top: 50%;
       left: 0;
-      transform: translateY(-50%) rotate(-45deg);
+      transform: translate(-41.6%,-50%) rotate(-45deg);
     }
   }
 }

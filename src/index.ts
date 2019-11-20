@@ -1,14 +1,47 @@
-/**
- * Module description
- */
 import {TooltipContent, TooltipOptions} from '../index';
 
+/**
+ *
+ * Tiny any beautiful tooltips module.
+ *
+ * Can be showed near passed Element with any specified HTML content
+ *
+ * https://github.com/codex-team/codex.tooltips <- ★ Star if you like it ( ͡° ͜ ͡°)
+ *
+ * @author CodeX <codex.so>
+ * @licence MIT
+ */
 class Tooltip {
+  /**
+   * Module nodes
+   */
+  private nodes: {
+    wrapper: HTMLElement,
+    content: HTMLElement,
+  } = {
+    wrapper: null,
+    content: null,
+  };
+
+  /**
+   * Offset above the Tooltip
+   */
+  private offsetTop: number = -15;
+
+  /**
+   * Offset at the left from the Tooltip
+   */
+  private offsetLeft: number = 10;
+
+  /**
+   * Offset at the right from the Tooltip
+   */
+  private offsetRight: number = 10;
 
   /**
    * Tooltip CSS classes
    */
-  public get CSS() {
+  private get CSS() {
     return {
       tooltip: 'ce-tooltip',
       tooltipContent: 'ce-tooltip__content',
@@ -23,24 +56,6 @@ class Tooltip {
   }
 
   /**
-   * Module nodes
-   */
-  public nodes: {
-    wrapper: HTMLElement,
-    content: HTMLElement,
-  } = {
-    wrapper: null,
-    content: null,
-  };
-
-  /**
-   * tooltip top offset
-   */
-  private offsetTop: number = -15;
-  private offsetLeft: number = 10;
-  private offsetRight: number = 10;
-
-  /**
    * Module constructor
    */
   constructor() {
@@ -49,11 +64,11 @@ class Tooltip {
   }
 
   /**
-   * Show tooltip for toolbox button
+   * Show Tooltip near passed element with specified HTML content
    *
-   * @param {HTMLElement} element
-   * @param {TooltipContent} content
-   * @param {TooltipOptions} customOptions
+   * @param {HTMLElement} element - target element to place Tooltip near that
+   * @param {TooltipContent} content — any HTML Element of String that will be used as content
+   * @param {TooltipOptions} customOptions — Available options {@link TooltipOptions}
    */
   public show(element: HTMLElement, content: TooltipContent, customOptions: TooltipOptions): void {
     if (!this.nodes.wrapper) {
@@ -70,7 +85,14 @@ class Tooltip {
     const showingOptions = Object.assign(basicOptions, customOptions);
 
     this.nodes.content.innerHTML = '';
-    this.nodes.content.appendChild(content);
+
+    if (typeof content === 'string') {
+      this.nodes.content.appendChild(document.createTextNode(content));
+    } else if (content instanceof Node) {
+      this.nodes.content.appendChild(content);
+    } else {
+      throw Error('[CodeX Tooltip] Wrong type of «content» passed. It should be an instance of Node or String. But ' + typeof content + ' given.');
+    }
 
     switch (showingOptions.placement) {
       case 'top':
@@ -97,6 +119,7 @@ class Tooltip {
    * Hide toolbox tooltip and clean content
    */
   public hide(): void {
+    return;
     this.nodes.wrapper.classList.remove(this.CSS.tooltipShown);
 
     // remove placement css classes

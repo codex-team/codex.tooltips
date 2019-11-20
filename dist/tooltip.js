@@ -106,10 +106,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
-/*!*******************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
-  \*******************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -127,10 +127,10 @@ module.exports = _arrayWithoutHoles;
 
 /***/ }),
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/classCallCheck.js":
-/*!****************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/classCallCheck.js ***!
-  \****************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/classCallCheck.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -144,10 +144,10 @@ module.exports = _classCallCheck;
 
 /***/ }),
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/createClass.js":
-/*!*************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/createClass.js ***!
-  \*************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/createClass.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -171,16 +171,16 @@ module.exports = _createClass;
 
 /***/ }),
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/interopRequireDefault.js":
-/*!***********************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \***********************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
-    default: obj
+    "default": obj
   };
 }
 
@@ -188,10 +188,10 @@ module.exports = _interopRequireDefault;
 
 /***/ }),
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/iterableToArray.js":
-/*!*****************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/iterableToArray.js ***!
-  \*****************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -203,10 +203,10 @@ module.exports = _iterableToArray;
 
 /***/ }),
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/nonIterableSpread.js":
-/*!*******************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
-  \*******************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -218,24 +218,51 @@ module.exports = _nonIterableSpread;
 
 /***/ }),
 
-/***/ "../../../../node_modules/@babel/runtime/helpers/toConsumableArray.js":
-/*!*******************************************************************************************************!*\
-  !*** /Users/khaydarovm/Development/editorjs/node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
-  \*******************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "../../../../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
 
-var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "../../../../node_modules/@babel/runtime/helpers/iterableToArray.js");
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
 
-var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "../../../../node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
 
 function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
 }
 
 module.exports = _toConsumableArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/typeof.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
 
 /***/ }),
 
@@ -248,20 +275,32 @@ module.exports = _toConsumableArray;
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "../../../../node_modules/@babel/runtime/helpers/toConsumableArray.js"), __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../../../../node_modules/@babel/runtime/helpers/classCallCheck.js"), __webpack_require__(/*! @babel/runtime/helpers/createClass */ "../../../../node_modules/@babel/runtime/helpers/createClass.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js"), __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js"), __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js"), __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else { var mod; }
-})(this, function (_toConsumableArray2, _classCallCheck2, _createClass2) {
+})(this, function (_toConsumableArray2, _typeof2, _classCallCheck2, _createClass2) {
   "use strict";
 
-  var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../../../../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+  var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 
   _toConsumableArray2 = _interopRequireDefault(_toConsumableArray2);
+  _typeof2 = _interopRequireDefault(_typeof2);
   _classCallCheck2 = _interopRequireDefault(_classCallCheck2);
   _createClass2 = _interopRequireDefault(_createClass2);
 
+  /**
+   *
+   * Tiny any beautiful tooltips module.
+   *
+   * Can be showed near passed Element with any specified HTML content
+   *
+   * https://github.com/codex-team/codex.tooltips <- ★ Star if you like it ( ͡° ͜ ͡°)
+   *
+   * @author CodeX <codex.so>
+   * @licence MIT
+   */
   var Tooltip =
   /*#__PURE__*/
   function () {
@@ -269,7 +308,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
      * Module constructor
      */
     function Tooltip() {
-      (0, _classCallCheck2.default)(this, Tooltip);
+      (0, _classCallCheck2["default"])(this, Tooltip);
 
       /**
        * Module nodes
@@ -279,11 +318,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         content: null
       };
       /**
-       * tooltip top offset
+       * Offset above the Tooltip
        */
 
       this.offsetTop = -15;
+      /**
+       * Offset at the left from the Tooltip
+       */
+
       this.offsetLeft = 10;
+      /**
+       * Offset at the right from the Tooltip
+       */
+
       this.offsetRight = 10;
       this.loadStyles();
       this.prepare();
@@ -293,15 +340,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
      */
 
 
-    (0, _createClass2.default)(Tooltip, [{
+    (0, _createClass2["default"])(Tooltip, [{
       key: "show",
 
       /**
-       * Show tooltip for toolbox button
+       * Show Tooltip near passed element with specified HTML content
        *
-       * @param {HTMLElement} element
-       * @param {TooltipContent} content
-       * @param {TooltipOptions} customOptions
+       * @param {HTMLElement} element - target element to place Tooltip near that
+       * @param {TooltipContent} content — any HTML Element of String that will be used as content
+       * @param {TooltipOptions} customOptions — Available options {@link TooltipOptions}
        */
       value: function show(element, content, customOptions) {
         if (!this.nodes.wrapper) {
@@ -317,7 +364,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         };
         var showingOptions = Object.assign(basicOptions, customOptions);
         this.nodes.content.innerHTML = '';
-        this.nodes.content.appendChild(content);
+
+        if (typeof content === 'string') {
+          this.nodes.content.appendChild(document.createTextNode(content));
+        } else if (content instanceof Node) {
+          this.nodes.content.appendChild(content);
+        } else {
+          throw Error('[CodeX Tooltip] Wrong type of «content» passed. It should be an instance of Node or String. But ' + (0, _typeof2["default"])(content) + ' given.');
+        }
 
         switch (showingOptions.placement) {
           case 'top':
@@ -347,6 +401,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "hide",
       value: function hide() {
+        return;
         this.nodes.wrapper.classList.remove(this.CSS.tooltipShown); // remove placement css classes
 
         this.nodes.wrapper.classList.remove(this.CSS.placement.bottom, this.CSS.placement.left, this.CSS.placement.right, this.CSS.placement.top);
@@ -472,7 +527,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         if (Array.isArray(classNames)) {
           var _el$classList;
 
-          (_el$classList = el.classList).add.apply(_el$classList, (0, _toConsumableArray2.default)(classNames));
+          (_el$classList = el.classList).add.apply(_el$classList, (0, _toConsumableArray2["default"])(classNames));
         } else if (classNames) {
           el.classList.add(classNames);
         }
@@ -554,7 +609,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".ce-tooltip{position:absolute;z-index:999;top:25px;border-radius:5px;opacity:0;background:#eff2f5;-webkit-box-shadow:0 10px 12px -9px rgba(26,39,54,.32),0 3px 2px -2px rgba(33,48,73,.05);box-shadow:0 10px 12px -9px rgba(26,39,54,.32),0 3px 2px -2px rgba(33,48,73,.05);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;-webkit-transition:opacity .15s ease-in,left .1s linear;transition:opacity .15s ease-in,left .1s linear;will-change:opacity,left}@media (--mobile){.ce-tooltip{display:none}}.ce-tooltip__content{padding:6px 10px;color:#5c6174;font-size:12px;text-align:center;letter-spacing:.02em;line-height:1em}.ce-tooltip--shown{opacity:1;-webkit-transition-delay:.1s,0s;transition-delay:.1s,0s}.ce-tooltip:before{content:\"\";width:10px;height:10px;position:absolute;background-color:#eff2f5;z-index:-1}.ce-tooltip--placement-left:before{top:50%;left:100%;-webkit-transform:translateY(-50%) rotate(-45deg);transform:translateY(-50%) rotate(-45deg)}.ce-tooltip--placement-bottom:before{top:-5px;left:50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.ce-tooltip--placement-top:before{top:100%;left:50%;-webkit-transform:translateY(-50%) rotate(-45deg);transform:translateY(-50%) rotate(-45deg)}.ce-tooltip--placement-right:before{top:50%;left:0;-webkit-transform:translateY(-50%) rotate(-45deg);transform:translateY(-50%) rotate(-45deg)}"
+module.exports = ".ce-tooltip{position:absolute;z-index:999;top:25px;border-radius:9px;opacity:0;-webkit-box-shadow:0 4px 5px -3px rgba(5,6,12,.49),0 8px 12px 0 rgba(29,32,43,.17);box-shadow:0 4px 5px -3px rgba(5,6,12,.49),0 8px 12px 0 rgba(29,32,43,.17);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;-webkit-transition:opacity .14s ease-in,left 90ms ease;transition:opacity .14s ease-in,left 90ms ease;will-change:opacity,left;background:#1d202b}.ce-tooltip:before{content:\"\";left:0;top:0;bottom:0;right:0;position:absolute;background-color:#1d202b;-webkit-mask-box-image:url('data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"><path d=\"M10.71 0h2.58c3.02 0 4.64.42 6.1 1.2a8.18 8.18 0 013.4 3.4C23.6 6.07 24 7.7 24 10.71v2.58c0 3.02-.42 4.64-1.2 6.1a8.18 8.18 0 01-3.4 3.4c-1.47.8-3.1 1.21-6.11 1.21H10.7c-3.02 0-4.64-.42-6.1-1.2a8.18 8.18 0 01-3.4-3.4C.4 17.93 0 16.3 0 13.29V10.7c0-3.02.42-4.64 1.2-6.1a8.18 8.18 0 013.4-3.4C6.07.4 7.7 0 10.71 0z\"/></svg>') 48% 41% 37.9% 53.3%;z-index:-1}@media (--mobile){.ce-tooltip{display:none}}.ce-tooltip__content{padding:6px 10px;color:#cdd1e0;font-size:12px;text-align:center;letter-spacing:.02em;line-height:1em}.ce-tooltip--shown{opacity:1;-webkit-transition-delay:.1s,0s;transition-delay:.1s,0s}.ce-tooltip:after{content:\"\";width:10px;height:10px;position:absolute;background-color:#1d202b;z-index:-1}.ce-tooltip--placement-left:after{top:50%;left:100%;-webkit-transform:translateY(-50%) rotate(-45deg);transform:translateY(-50%) rotate(-45deg)}.ce-tooltip--placement-bottom:after{top:-5px}.ce-tooltip--placement-bottom:after,.ce-tooltip--placement-top:after{left:50%;-webkit-transform:translateX(-50%) rotate(-45deg);transform:translateX(-50%) rotate(-45deg)}.ce-tooltip--placement-top:after{top:100%}.ce-tooltip--placement-right:after{top:50%;left:0;-webkit-transform:translate(-41.6%,-50%) rotate(-45deg);transform:translate(-41.6%,-50%) rotate(-45deg)}"
 
 /***/ }),
 

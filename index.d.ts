@@ -31,7 +31,7 @@ export interface TooltipOptions {
 /**
  * Tooltip supported content
  */
-export type TooltipContent = HTMLElement | DocumentFragment | Node;
+export type TooltipContent = HTMLElement | DocumentFragment | Node | String;
 
 declare namespace tooltip {
   /**
