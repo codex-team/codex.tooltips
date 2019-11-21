@@ -26,14 +26,15 @@ module.exports = (env, argv) => {
 
   return {
     entry: {
-      'tooltip': ['./src/index.ts']
+      'tooltip': [ './src/index.ts' ]
     },
 
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
-      library: [ 'tooltip' ],
-      libraryTarget: 'umd'
+      library: [ 'Tooltip' ],
+      libraryTarget: 'umd',
+      libraryExport: 'default'
     },
 
     watchOptions: {
@@ -67,12 +68,12 @@ module.exports = (env, argv) => {
         {
           test: /\.ts$/,
           use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                cacheDirectory: true,
-              }
-            },
+            // {
+            //   loader: 'babel-loader',
+            //   options: {
+            //     cacheDirectory: true,
+            //   }
+            // },
             {
               loader: 'ts-loader'
             },

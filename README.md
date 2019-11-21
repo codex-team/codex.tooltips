@@ -1,37 +1,36 @@
 # codex.tooltips
 
 Lightweight JavaScript module for adding tooltips with custom content
-to any HTML element on DOM
+to any HTML element
 
-# Installation
+## Installation
 
-## install via NPM/Yarn
-
-```shell
-npm install codex.tooltips
-```
+First, install it via package manager:
 
 ```shell
 yarn add codex.tooltips
 ```
 
-To include tooltips to your script follow the instructions below:
-
-```js
-const tooltip = require('codex.tooltips');
+```shell
+npm install codex.tooltips
 ```
 
-or 
+Then, include tooltips to your script, create an instance and call hiding/showig methods:
 
 ```js
-import tooltip from 'codex.tooltips';
+import Tooltip from 'codex.tooltips';
+
+const tooltip = new Tooltip();
+
+tooltip.show(targetElement, 'Tooltip text');
+
 ```
 
 ## Usage
 
-There are two main methods: 
+There are two main methods: `show()` and `hide()`  
 
-#### Show
+### Show
 
 Method shows tooltip with custom content on passed element
  
@@ -39,32 +38,45 @@ Method shows tooltip with custom content on passed element
 tooltip.show(element, content, options);
 ``` 
 
-* `element` — existed HTML in your DOM
-* `content` — HTML Node, fragment or Element that will be put inside the tooltip
-* `options` - additional tooltip behavioral options
+| parameter | type | description |
+| -- | -- | -- |
+| `element` | _HTMLElement_ | Tooltip will be showed near this element |
+| `content` | _String_ or _Node_ | Content that will be appended to the Tooltip |
+| `options` | _Object_ | Some displaying options, see below |
 
-#### Hide
+Available showing options 
 
-Method hides tooltip
+| name | type | action |
+| -- | -- | -- |
+| placement | `top`, `botton`, `left`, `right` | Where to place the tooltip | 
+| marginTop | _Number_ | Offset above the tooltip with `top` placement | 
+| marginBottom | _Number_ | Offset below the tooltip with `bottom` placement | 
+| marginLeft | _Number_ | Offset at left from the tooltip with `left` placement | 
+| marginRight | _Number_ | Offset at right from the tooltip with `right` placement | 
+
+### Hide
+
+Method hides the Tooltip.
+
 ```js
 tooltip.hide();
 ```
 
-#### Example
+### Example
 
 ```js
-const myDiv = document.getElementById('#myDiv');
+import Tooltip from 'codex.tooltips';
 
-myDiv.addEventListener('mouseenter', (event) => {
-  const text = 'Element description'
-  const tooltipContent = document.createTextNode(text);
+const tooltip = new Tooltip();
+const someButton = document.getElementById('some-button');
 
-  tooltip.show(myDiv, tooltipContent);
+someButton.addEventListener('mouseenter', () => {
+  tooltip.show(someButton, 'Button helper');
 });
 
-myDiv.addEventListener('mouseleave', (event) => {
+someButton.addEventListener('mouseleave', () => {
   tooltip.hide();
 });
 ```
 
-In example above we show tooltip on #myDiv element on "mouseenter" and hide on "mouseleave"
+In example above we show tooltip near some button by "mouseenter" and hide by "mouseleave".

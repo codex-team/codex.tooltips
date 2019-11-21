@@ -11,7 +11,7 @@ import {TooltipContent, TooltipOptions} from '../index';
  * @author CodeX <codex.so>
  * @licence MIT
  */
-class Tooltip {
+export default class Tooltip {
   /**
    * Module nodes
    */
@@ -26,7 +26,7 @@ class Tooltip {
   /**
    * Offset above the Tooltip
    */
-  private offsetTop: number = -15;
+  private offsetTop: number = 10;
 
   /**
    * Offset at the left from the Tooltip
@@ -91,8 +91,11 @@ class Tooltip {
     } else if (content instanceof Node) {
       this.nodes.content.appendChild(content);
     } else {
-      throw Error('[CodeX Tooltip] Wrong type of «content» passed. It should be an instance of Node or String. But ' + typeof content + ' given.');
+      throw Error('[CodeX Tooltip] Wrong type of «content» passed. It should be an instance of Node or String. ' +
+        'But ' + typeof content + ' given.');
     }
+
+    this.nodes.wrapper.classList.remove(...Object.values(this.CSS.placement));
 
     switch (showingOptions.placement) {
       case 'top':
@@ -121,14 +124,6 @@ class Tooltip {
   public hide(): void {
     return;
     this.nodes.wrapper.classList.remove(this.CSS.tooltipShown);
-
-    // remove placement css classes
-    this.nodes.wrapper.classList.remove(
-      this.CSS.placement.bottom,
-      this.CSS.placement.left,
-      this.CSS.placement.right,
-      this.CSS.placement.top,
-    );
   }
 
   /**
@@ -164,7 +159,7 @@ class Tooltip {
     const elementCoords = element.getBoundingClientRect();
     const topPlacement = {
       left: elementCoords.left + element.clientWidth / 2,
-      top: elementCoords.top + window.pageYOffset - element.clientHeight - this.nodes.wrapper.clientHeight,
+      top: elementCoords.top + window.pageYOffset - this.nodes.wrapper.clientHeight - this.offsetTop,
     };
 
     this.nodes.wrapper.classList.add(this.CSS.placement.top);
@@ -182,14 +177,14 @@ class Tooltip {
   private placeLeftOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
     const leftPlacement = {
-      left: elementCoords.left - this.nodes.wrapper.clientWidth + this.offsetLeft + showingOptions.marginLeft,
-      top: elementCoords.top + window.pageYOffset - element.clientHeight / 2 + showingOptions.marginLeft,
+      left: elementCoords.left - this.nodes.wrapper.offsetWidth - this.offsetLeft - showingOptions.marginLeft,
+      top: elementCoords.top + window.pageYOffset + element.clientHeight / 2 ,
     };
 
     this.nodes.wrapper.classList.add(this.CSS.placement.left);
 
     this.nodes.wrapper.style.left = `${leftPlacement.left}px`;
-    this.nodes.wrapper.style.transform = `translate3d(-50%, ${leftPlacement.top}px, 0)`;
+    this.nodes.wrapper.style.transform = `translate3d(0, ${leftPlacement.top}px, 0)`;
   }
 
   /**
@@ -201,14 +196,14 @@ class Tooltip {
   private placeRightOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
     const rightPlacement = {
-      left: elementCoords.right + this.nodes.wrapper.clientWidth / 2 + this.offsetRight + showingOptions.marginRight,
+      left: elementCoords.right + this.offsetRight + showingOptions.marginRight,
       top: elementCoords.top + window.pageYOffset - element.clientHeight / 2 + showingOptions.marginLeft,
     };
 
     this.nodes.wrapper.classList.add(this.CSS.placement.right);
 
     this.nodes.wrapper.style.left = `${rightPlacement.left}px`;
-    this.nodes.wrapper.style.transform = `translate3d(-50%, ${rightPlacement.top}px, 0)`;
+    this.nodes.wrapper.style.transform = `translate3d(0, ${rightPlacement.top}px, 0)`;
   }
 
   /**
@@ -285,5 +280,3 @@ class Tooltip {
     }
   }
 }
-
-module.exports = new Tooltip();
