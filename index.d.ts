@@ -38,7 +38,12 @@ export interface TooltipOptions {
  */
 export type TooltipContent = HTMLElement | DocumentFragment | Node | string;
 
-declare namespace tooltip {
+declare class Tooltip {
+  /**
+   * Class constructor. Loads styles.
+   */
+  constructor();
+
   /**
    * Shows the Tooltip near passed element
    *
@@ -46,7 +51,7 @@ declare namespace tooltip {
    * @param {TooltipContent} content - Content that will be appended to the Tooltip
    * @param {TooltipOptions} options - Some displaying options, see below
    */
-  export function show(
+  public show(
     element: HTMLElement,
     content: TooltipContent,
     options?: TooltipOptions,
@@ -55,20 +60,20 @@ declare namespace tooltip {
   /**
    * Hides the Tooltip
    */
-  export function hide(): void;
+  public hide(): void;
 
   /**
-   * Decorator for showing Tooltip by mouseenter/mosueleave
+   * Decorator for showing Tooltip by mouseenter/mouseleave
    *
    * @param {HTMLElement} element — Tooltip will be showed near this element
    * @param {TooltipContent} content - Content that will be appended to the Tooltip
    * @param {TooltipOptions} options - Some displaying options, see below
    */
-  export function onHover(
+  public onHover(
     element: HTMLElement,
     content: TooltipContent,
     options?: TooltipOptions,
   ): void;
 }
 
-export default tooltip;
+export default Tooltip;
