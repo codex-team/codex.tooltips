@@ -3,6 +3,8 @@
 Lightweight JavaScript module for adding tooltips with custom content
 to any HTML element
 
+<img src="https://capella.pics/2420be21-6f5c-41a0-b11b-64bb8e423102.jpg" style="max-width: 100%">
+
 ## Installation
 
 First, install it via package manager:
