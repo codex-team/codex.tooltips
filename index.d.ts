@@ -26,6 +26,11 @@ export interface TooltipOptions {
    * Tooltip bottom margin
    */
   marginBottom?: number;
+
+  /**
+   * Timout before showing
+   */
+  delay?: number;
 }
 
 /**

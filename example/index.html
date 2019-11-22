@@ -42,8 +42,8 @@
         <span class="button" data-placement="top">Top</span>
       </div>
       <div class="table__row">
-        <span class="button" data-placement="right">Right</span>
         <span class="button" data-placement="left">Left</span>
+        <span class="button" data-placement="right">Right</span>
       </div>
     </div>
     <script src="../dist/tooltip.js"></script>
@@ -52,14 +52,9 @@
       const buttons = document.querySelectorAll('.button');
 
       Array.from(buttons).forEach(button => {
-        button.addEventListener('mouseenter', () => {
-          tooltip.show(button, 'Some text', {
-            placement: button.dataset.placement
-          })
-        })
-        button.addEventListener('mouseleave', () => {
-          tooltip.hide()
-        })
+        tooltip.onHover(button, 'Some text', {
+          placement: button.dataset.placement,
+        });
       })
     </script>
   </body>

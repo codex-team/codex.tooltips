@@ -12,6 +12,23 @@ import {TooltipContent, TooltipOptions} from '../index';
  * @licence MIT
  */
 export default class Tooltip {
+
+  /**
+   * Tooltip CSS classes
+   */
+  private get CSS() {
+    return {
+      tooltip: 'ce-tooltip',
+      tooltipContent: 'ce-tooltip__content',
+      tooltipShown: 'ce-tooltip--shown',
+      placement: {
+        left: 'ce-tooltip--left',
+        bottom: 'ce-tooltip--bottom',
+        right: 'ce-tooltip--right',
+        top: 'ce-tooltip--top',
+      },
+    };
+  }
   /**
    * Module nodes
    */
@@ -39,21 +56,9 @@ export default class Tooltip {
   private offsetRight: number = 10;
 
   /**
-   * Tooltip CSS classes
+   * Store timeout before showing to clear it on hide
    */
-  private get CSS() {
-    return {
-      tooltip: 'ce-tooltip',
-      tooltipContent: 'ce-tooltip__content',
-      tooltipShown: 'ce-tooltip--shown',
-      placement: {
-        left: 'ce-tooltip--placement-left',
-        bottom: 'ce-tooltip--placement-bottom',
-        right: 'ce-tooltip--placement-right',
-        top: 'ce-tooltip--placement-top',
-      },
-    };
-  }
+  private showingTimeout: NodeJS.Timer;
 
   /**
    * Module constructor
@@ -68,9 +73,9 @@ export default class Tooltip {
    *
    * @param {HTMLElement} element - target element to place Tooltip near that
    * @param {TooltipContent} content — any HTML Element of String that will be used as content
-   * @param {TooltipOptions} customOptions — Available options {@link TooltipOptions}
+   * @param {TooltipOptions} options — Available options {@link TooltipOptions}
    */
-  public show(element: HTMLElement, content: TooltipContent, customOptions: TooltipOptions): void {
+  public show(element: HTMLElement, content: TooltipContent, options: TooltipOptions): void {
     if (!this.nodes.wrapper) {
       this.prepare();
     }
@@ -81,8 +86,9 @@ export default class Tooltip {
       marginLeft: 0,
       marginRight: 0,
       marginBottom: 0,
+      delay: 70,
     };
-    const showingOptions = Object.assign(basicOptions, customOptions);
+    const showingOptions = Object.assign(basicOptions, options);
 
     this.nodes.content.innerHTML = '';
 
@@ -115,15 +121,42 @@ export default class Tooltip {
         this.placeBottomOfElement(element, showingOptions);
         break;
     }
-    this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
+
+    if (showingOptions && showingOptions.delay) {
+      this.showingTimeout = setTimeout(() => {
+        this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
+      }, showingOptions.delay);
+    } else {
+      this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
+    }
+
   }
 
   /**
    * Hide toolbox tooltip and clean content
    */
   public hide(): void {
-    return;
     this.nodes.wrapper.classList.remove(this.CSS.tooltipShown);
+
+    if (this.showingTimeout) {
+      clearTimeout(this.showingTimeout);
+    }
+  }
+
+  /**
+   * Mouseover/Mouseleave decorator
+   *
+   * @param {HTMLElement} element - target element to place Tooltip near that
+   * @param {TooltipContent} content — any HTML Element of String that will be used as content
+   * @param {TooltipOptions} options — Available options {@link TooltipOptions}
+   */
+  public onHover(element, content, options) {
+    element.addEventListener('mouseenter', () => {
+      this.show(element, content, options);
+    });
+    element.addEventListener('mouseleave', () => {
+      this.hide();
+    });
   }
 
   /**
@@ -150,6 +183,25 @@ export default class Tooltip {
   }
 
   /**
+   * Calculates element coords and moves tooltip bottom of the element
+   *
+   * @param {HTMLElement} element
+   * @param {TooltipOptions} showingOptions
+   */
+  private placeBottomOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
+    const elementCoords = element.getBoundingClientRect();
+    const bottomPlacement = {
+      left: elementCoords.left + element.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2,
+      top: elementCoords.bottom + window.pageYOffset + this.offsetTop + showingOptions.marginTop,
+    };
+
+    this.nodes.wrapper.classList.add(this.CSS.placement.bottom);
+
+    this.nodes.wrapper.style.left = `${bottomPlacement.left}px`;
+    this.nodes.wrapper.style.top = `${bottomPlacement.top}px`;
+  }
+
+  /**
    * Calculates element coords and moves tooltip top of the element
    *
    * @param {HTMLElement} element
@@ -158,14 +210,14 @@ export default class Tooltip {
   private placeTopOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
     const topPlacement = {
-      left: elementCoords.left + element.clientWidth / 2,
+      left: elementCoords.left + element.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2,
       top: elementCoords.top + window.pageYOffset - this.nodes.wrapper.clientHeight - this.offsetTop,
     };
 
     this.nodes.wrapper.classList.add(this.CSS.placement.top);
 
     this.nodes.wrapper.style.left = `${topPlacement.left}px`;
-    this.nodes.wrapper.style.transform = `translate3d(-50%, ${topPlacement.top}px, 0)`;
+    this.nodes.wrapper.style.top = `${topPlacement.top}px`;
   }
 
   /**
@@ -178,13 +230,13 @@ export default class Tooltip {
     const elementCoords = element.getBoundingClientRect();
     const leftPlacement = {
       left: elementCoords.left - this.nodes.wrapper.offsetWidth - this.offsetLeft - showingOptions.marginLeft,
-      top: elementCoords.top + window.pageYOffset + element.clientHeight / 2 ,
+      top: elementCoords.top + window.pageYOffset + element.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2,
     };
 
     this.nodes.wrapper.classList.add(this.CSS.placement.left);
 
     this.nodes.wrapper.style.left = `${leftPlacement.left}px`;
-    this.nodes.wrapper.style.transform = `translate3d(0, ${leftPlacement.top}px, 0)`;
+    this.nodes.wrapper.style.top = `${leftPlacement.top}px`;
   }
 
   /**
@@ -197,32 +249,13 @@ export default class Tooltip {
     const elementCoords = element.getBoundingClientRect();
     const rightPlacement = {
       left: elementCoords.right + this.offsetRight + showingOptions.marginRight,
-      top: elementCoords.top + window.pageYOffset - element.clientHeight / 2 + showingOptions.marginLeft,
+      top: elementCoords.top + window.pageYOffset + element.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2,
     };
 
     this.nodes.wrapper.classList.add(this.CSS.placement.right);
 
     this.nodes.wrapper.style.left = `${rightPlacement.left}px`;
-    this.nodes.wrapper.style.transform = `translate3d(0, ${rightPlacement.top}px, 0)`;
-  }
-
-  /**
-   * Calculates element coords and moves tooltip bottom of the element
-   *
-   * @param {HTMLElement} element
-   * @param {TooltipOptions} showingOptions
-   */
-  private placeBottomOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
-    const elementCoords = element.getBoundingClientRect();
-    const bottomPlacement = {
-      left: elementCoords.left + element.clientWidth / 2,
-      top: elementCoords.bottom + window.pageYOffset + this.offsetTop + showingOptions.marginTop,
-    };
-
-    this.nodes.wrapper.classList.add(this.CSS.placement.bottom);
-
-    this.nodes.wrapper.style.left = `${bottomPlacement.left}px`;
-    this.nodes.wrapper.style.transform = `translate3d(-50%, ${bottomPlacement.top}px, 0)`;
+    this.nodes.wrapper.style.top = `${rightPlacement.top}px`;
   }
 
   /**

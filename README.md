@@ -48,11 +48,12 @@ Available showing options
 
 | name | type | action |
 | -- | -- | -- |
-| placement | `top`, `botton`, `left`, `right` | Where to place the tooltip | 
+| placement | `top`, `bottom`, `left`, `right` | Where to place the tooltip. Default value is `bottom' | 
 | marginTop | _Number_ | Offset above the tooltip with `top` placement | 
 | marginBottom | _Number_ | Offset below the tooltip with `bottom` placement | 
 | marginLeft | _Number_ | Offset at left from the tooltip with `left` placement | 
 | marginRight | _Number_ | Offset at right from the tooltip with `right` placement | 
+| delay | _Number_ | Delay before showing, in ms. Default is `70` | 
 
 ### Hide
 
@@ -79,4 +80,26 @@ someButton.addEventListener('mouseleave', () => {
 });
 ```
 
-In example above we show tooltip near some button by "mouseenter" and hide by "mouseleave".
+In example above we show tooltip near some button by "mouseenter" and hide by "mouseleave". 
+For this events you can also use the `onHover()` decorator: 
+
+```js
+import Tooltip from 'codex.tooltips';
+
+const tooltip = new Tooltip();
+const someButton = document.getElementById('some-button');
+
+tooltip.onHover(someButton, 'Button helper', {
+  placement: 'right',
+  delay: 150
+})
+```
+  
+  
+## CodeX
+
+This tool is made by CodeX.
+
+[http://codex.so](http://codex.so) 
+
+[http://twitter.com/codex_team](http://twitter.com/codex_team) 
