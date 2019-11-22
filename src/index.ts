@@ -9,7 +9,7 @@ import {TooltipContent, TooltipOptions} from '../index';
  * https://github.com/codex-team/codex.tooltips <- ★ Star if you like it ( ͡° ͜ ͡°)
  *
  * @author CodeX <codex.so>
- * @licence MIT
+ * @licence Apache
  */
 export default class Tooltip {
 
@@ -162,7 +162,7 @@ export default class Tooltip {
   /**
    * Module Preparation method
    */
-  private prepare() {
+  private prepare(): void {
     this.nodes.wrapper = this.make('div', this.CSS.tooltip);
     this.nodes.content = this.make('div', this.CSS.tooltipContent);
 
