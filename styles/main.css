@@ -12,7 +12,7 @@
   user-select: none;
   pointer-events: none;
   transition: opacity 50ms ease-in, transform 70ms cubic-bezier(0.215, 0.61, 0.355, 1);
-  will-change: opacity;
+  will-change: opacity, top, left;
 
   &::before {
     content: '';
