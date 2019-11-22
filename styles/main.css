@@ -3,7 +3,7 @@
   --ct-color-font: #CDD1E0;
 }
 
-.ce-tooltip {
+.ct {
   position: absolute;
   z-index: 999;
   top: 0;

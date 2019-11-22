@@ -18,14 +18,14 @@ export default class Tooltip {
    */
   private get CSS() {
     return {
-      tooltip: 'ce-tooltip',
-      tooltipContent: 'ce-tooltip__content',
-      tooltipShown: 'ce-tooltip--shown',
+      tooltip: 'ct',
+      tooltipContent: 'ct__content',
+      tooltipShown: 'ct--shown',
       placement: {
-        left: 'ce-tooltip--left',
-        bottom: 'ce-tooltip--bottom',
-        right: 'ce-tooltip--right',
-        top: 'ce-tooltip--top',
+        left: 'ct--left',
+        bottom: 'ct--bottom',
+        right: 'ct--right',
+        top: 'ct--top',
       },
     };
   }
@@ -105,20 +105,20 @@ export default class Tooltip {
 
     switch (showingOptions.placement) {
       case 'top':
-        this.placeTopOfElement(element, showingOptions);
+        this.placeTop(element, showingOptions);
         break;
 
       case 'left':
-        this.placeLeftOfElement(element, showingOptions);
+        this.placeLeft(element, showingOptions);
         break;
 
       case 'right':
-        this.placeRightOfElement(element, showingOptions);
+        this.placeRight(element, showingOptions);
         break;
 
       case 'bottom':
       default:
-        this.placeBottomOfElement(element, showingOptions);
+        this.placeBottom(element, showingOptions);
         break;
     }
 
@@ -150,7 +150,7 @@ export default class Tooltip {
    * @param {TooltipContent} content — any HTML Element of String that will be used as content
    * @param {TooltipOptions} options — Available options {@link TooltipOptions}
    */
-  public onHover(element, content, options) {
+  public onHover(element, content, options): void {
     element.addEventListener('mouseenter', () => {
       this.show(element, content, options);
     });
@@ -170,6 +170,9 @@ export default class Tooltip {
     this.append(document.body, this.nodes.wrapper);
   }
 
+  /**
+   * Append CSS file
+   */
   private loadStyles(): void {
     const styles = require('../styles/main.css');
     const tag = this.make('style', null, {
@@ -188,17 +191,12 @@ export default class Tooltip {
    * @param {HTMLElement} element
    * @param {TooltipOptions} showingOptions
    */
-  private placeBottomOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
+  private placeBottom(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
-    const bottomPlacement = {
-      left: elementCoords.left + element.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2,
-      top: elementCoords.bottom + window.pageYOffset + this.offsetTop + showingOptions.marginTop,
-    };
+    const left = elementCoords.left + element.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2;
+    const top = elementCoords.bottom + window.pageYOffset + this.offsetTop + showingOptions.marginTop;
 
-    this.nodes.wrapper.classList.add(this.CSS.placement.bottom);
-
-    this.nodes.wrapper.style.left = `${bottomPlacement.left}px`;
-    this.nodes.wrapper.style.top = `${bottomPlacement.top}px`;
+    this.applyPlacement('bottom', left, top);
   }
 
   /**
@@ -207,17 +205,12 @@ export default class Tooltip {
    * @param {HTMLElement} element
    * @param {TooltipOptions} showingOptions
    */
-  private placeTopOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
+  private placeTop(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
-    const topPlacement = {
-      left: elementCoords.left + element.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2,
-      top: elementCoords.top + window.pageYOffset - this.nodes.wrapper.clientHeight - this.offsetTop,
-    };
+    const left = elementCoords.left + element.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2;
+    const top = elementCoords.top + window.pageYOffset - this.nodes.wrapper.clientHeight - this.offsetTop;
 
-    this.nodes.wrapper.classList.add(this.CSS.placement.top);
-
-    this.nodes.wrapper.style.left = `${topPlacement.left}px`;
-    this.nodes.wrapper.style.top = `${topPlacement.top}px`;
+    this.applyPlacement('top', left, top);
   }
 
   /**
@@ -226,17 +219,12 @@ export default class Tooltip {
    * @param {HTMLElement} element
    * @param {TooltipOptions} showingOptions
    */
-  private placeLeftOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
+  private placeLeft(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
-    const leftPlacement = {
-      left: elementCoords.left - this.nodes.wrapper.offsetWidth - this.offsetLeft - showingOptions.marginLeft,
-      top: elementCoords.top + window.pageYOffset + element.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2,
-    };
+    const left = elementCoords.left - this.nodes.wrapper.offsetWidth - this.offsetLeft - showingOptions.marginLeft;
+    const top = elementCoords.top + window.pageYOffset + element.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2;
 
-    this.nodes.wrapper.classList.add(this.CSS.placement.left);
-
-    this.nodes.wrapper.style.left = `${leftPlacement.left}px`;
-    this.nodes.wrapper.style.top = `${leftPlacement.top}px`;
+    this.applyPlacement('left', left, top);
   }
 
   /**
@@ -245,17 +233,22 @@ export default class Tooltip {
    * @param {HTMLElement} element
    * @param {TooltipOptions} showingOptions
    */
-  private placeRightOfElement(element: HTMLElement, showingOptions: TooltipOptions): void {
+  private placeRight(element: HTMLElement, showingOptions: TooltipOptions): void {
     const elementCoords = element.getBoundingClientRect();
-    const rightPlacement = {
-      left: elementCoords.right + this.offsetRight + showingOptions.marginRight,
-      top: elementCoords.top + window.pageYOffset + element.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2,
-    };
+    const left = elementCoords.right + this.offsetRight + showingOptions.marginRight;
+    const top = elementCoords.top + window.pageYOffset + element.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2;
 
-    this.nodes.wrapper.classList.add(this.CSS.placement.right);
+    this.applyPlacement('right', left, top);
+  }
 
-    this.nodes.wrapper.style.left = `${rightPlacement.left}px`;
-    this.nodes.wrapper.style.top = `${rightPlacement.top}px`;
+  /**
+   * Set wrapper position
+   */
+  private applyPlacement(place: string, left: number, top: number): void {
+    this.nodes.wrapper.classList.add(this.CSS.placement[place]);
+
+    this.nodes.wrapper.style.left = `${left}px`;
+    this.nodes.wrapper.style.top = `${top}px`;
   }
 
   /**
