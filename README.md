@@ -102,6 +102,6 @@ tooltip.onHover(someButton, 'Button helper', {
 
 This tool is made by CodeX.
 
-[http://codex.so](http://codex.so) 
+[https://codex.so](https://codex.so) 
 
-[http://twitter.com/codex_team](http://twitter.com/codex_team) 
+[https://twitter.com/codex_team](https://twitter.com/codex_team) 
