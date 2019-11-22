@@ -174,9 +174,16 @@ export default class Tooltip {
    * Append CSS file
    */
   private loadStyles(): void {
+    const id = 'codex-tooltips-style';
+
+    if (document.getElementById(id)) {
+      return;
+    }
+
     const styles = require('../styles/main.css');
     const tag = this.make('style', null, {
       textContent: styles.toString(),
+      id,
     });
 
     /**
