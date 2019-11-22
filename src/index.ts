@@ -9,7 +9,7 @@ import {TooltipContent, TooltipOptions} from '../index';
  * https://github.com/codex-team/codex.tooltips <- ★ Star if you like it ( ͡° ͜ ͡°)
  *
  * @author CodeX <codex.so>
- * @licence Apache
+ * @licence MIT
  */
 export default class Tooltip {
 

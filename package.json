@@ -8,7 +8,7 @@
     "build:dev": "webpack --mode development --progress --display-error-details --display-entrypoints --watch",
     "build:prod": "webpack --mode production"
   },
-  "license": "Apache",
+  "license": "MIT",
   "author": {
     "name": "CodeX",
     "email": "team@codex.so"

@@ -3,7 +3,7 @@
  * 
  * @version 1.0.0
  * 
- * @licence Apache-2.0
+ * @licence MIT
  * @author CodeX <https://codex.so>
  * 
  * 
