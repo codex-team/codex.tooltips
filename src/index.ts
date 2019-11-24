@@ -61,6 +61,16 @@ export default class Tooltip {
   private showingTimeout: NodeJS.Timer;
 
   /**
+   * How many milliseconds need to wait before hiding
+   */
+  private hidingDelay: number = 0;
+
+  /**
+   * Store timeout before hiding
+   */
+  private hidingTimeout: NodeJS.Timer;
+
+  /**
    * Module constructor
    */
   constructor() {
@@ -80,6 +90,11 @@ export default class Tooltip {
       this.prepare();
     }
 
+    // debounce
+    if (this.hidingTimeout) {
+      clearTimeout(this.hidingTimeout);
+    }
+
     const basicOptions = {
       placement: 'bottom',
       marginTop: 0,
@@ -87,8 +102,13 @@ export default class Tooltip {
       marginRight: 0,
       marginBottom: 0,
       delay: 70,
+      hidingDelay: 0,
     };
     const showingOptions = Object.assign(basicOptions, options);
+
+    if (showingOptions.hidingDelay) {
+      this.hidingDelay = showingOptions.hidingDelay;
+    }
 
     this.nodes.content.innerHTML = '';
 
@@ -134,8 +154,22 @@ export default class Tooltip {
 
   /**
    * Hide toolbox tooltip and clean content
+   * @param {boolean} skipDelay - forces hiding immediately
    */
-  public hide(): void {
+  public hide(skipDelay: boolean = false): void {
+    if (this.hidingDelay && !skipDelay) {
+      // debounce
+      if (this.hidingTimeout) {
+        clearTimeout(this.hidingTimeout);
+      }
+
+      this.hidingTimeout = setTimeout(() => {
+        this.hide(true);
+      }, this.hidingDelay);
+
+      return;
+    }
+
     this.nodes.wrapper.classList.remove(this.CSS.tooltipShown);
 
     if (this.showingTimeout) {

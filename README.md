@@ -56,6 +56,7 @@ Available showing options
 | marginLeft | _Number_ | Offset at left from the tooltip with `left` placement | 
 | marginRight | _Number_ | Offset at right from the tooltip with `right` placement | 
 | delay | _Number_ | Delay before showing, in ms. Default is `70` | 
+| hidingDelay | _Number_ | Delay before hiding, in ms. Default is `0` | 
 
 ### Hide
 

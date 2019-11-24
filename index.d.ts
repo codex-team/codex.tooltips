@@ -31,6 +31,11 @@ export interface TooltipOptions {
    * Timout before showing
    */
   delay?: number;
+
+  /**
+   * Timout before hiding
+   */
+  hidingDelay?: number;
 }
 
 /**
