@@ -41,6 +41,11 @@ export default class Tooltip {
   };
 
   /**
+   * Appearance state
+   */
+  private showed: boolean = false;
+
+  /**
    * Offset above the Tooltip
    */
   private offsetTop: number = 10;
@@ -76,6 +81,15 @@ export default class Tooltip {
   constructor() {
     this.loadStyles();
     this.prepare();
+
+    /**
+     * Scroll tootip when page is scrolled
+     */
+    window.addEventListener('scroll', () => {
+      if (this.showed) {
+        this.hide(true);
+      }
+    }, {passive: true});
   }
 
   /**
@@ -145,9 +159,11 @@ export default class Tooltip {
     if (showingOptions && showingOptions.delay) {
       this.showingTimeout = setTimeout(() => {
         this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
+        this.showed = true;
       }, showingOptions.delay);
     } else {
       this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
+      this.showed = true;
     }
 
   }
@@ -171,6 +187,7 @@ export default class Tooltip {
     }
 
     this.nodes.wrapper.classList.remove(this.CSS.tooltipShown);
+    this.showed = false;
 
     if (this.showingTimeout) {
       clearTimeout(this.showingTimeout);
