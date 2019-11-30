@@ -63,7 +63,7 @@ export default class Tooltip {
   /**
    * Store timeout before showing to clear it on hide
    */
-  private showingTimeout: NodeJS.Timer;
+  private showingTimeout;
 
   /**
    * How many milliseconds need to wait before hiding
@@ -73,7 +73,7 @@ export default class Tooltip {
   /**
    * Store timeout before hiding
    */
-  private hidingTimeout: NodeJS.Timer;
+  private hidingTimeout;
 
   /**
    * Module constructor
