@@ -83,7 +83,7 @@ export default class Tooltip {
     this.prepare();
 
     /**
-     * Scroll tootip when page is scrolled
+     * Hide tooltip when page is scrolled
      */
     window.addEventListener('scroll', () => {
       if (this.showed) {
@@ -104,7 +104,6 @@ export default class Tooltip {
       this.prepare();
     }
 
-    // debounce
     if (this.hidingTimeout) {
       clearTimeout(this.hidingTimeout);
     }
