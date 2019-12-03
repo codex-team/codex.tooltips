@@ -10,11 +10,11 @@ to any HTML element
 First, install it via package manager:
 
 ```shell
-yarn add codex.tooltips
+yarn add codex-tooltip
 ```
 
 ```shell
-npm install codex.tooltips
+npm install codex-tooltip
 ```
 
 Then, include tooltips to your script, create an instance and call hiding/showig methods:
