@@ -20,7 +20,7 @@ npm install codex-tooltip
 Then, include tooltips to your script, create an instance and call hiding/showig methods:
 
 ```js
-import Tooltip from 'codex.tooltips';
+import Tooltip from 'codex.tooltip';
 
 const tooltip = new Tooltip();
 
@@ -69,7 +69,7 @@ tooltip.hide();
 ### Example
 
 ```js
-import Tooltip from 'codex.tooltips';
+import Tooltip from 'codex.tooltip';
 
 const tooltip = new Tooltip();
 const someButton = document.getElementById('some-button');
@@ -87,7 +87,7 @@ In example above we show tooltip near some button by "mouseenter" and hide by "m
 For this events you can also use the `onHover()` decorator: 
 
 ```js
-import Tooltip from 'codex.tooltips';
+import Tooltip from 'codex.tooltip';
 
 const tooltip = new Tooltip();
 const someButton = document.getElementById('some-button');
