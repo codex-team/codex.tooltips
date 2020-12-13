@@ -82,14 +82,7 @@ export default class Tooltip {
     this.loadStyles();
     this.prepare();
 
-    /**
-     * Hide tooltip when page is scrolled
-     */
-    window.addEventListener('scroll', () => {
-      if (this.showed) {
-        this.hide(true);
-      }
-    }, {passive: true});
+    window.addEventListener('scroll', this.handleWindowScroll, {passive: true});
   }
 
   /**
@@ -164,7 +157,6 @@ export default class Tooltip {
       this.nodes.wrapper.classList.add(this.CSS.tooltipShown);
       this.showed = true;
     }
-
   }
 
   /**
@@ -207,6 +199,24 @@ export default class Tooltip {
     element.addEventListener('mouseleave', () => {
       this.hide();
     });
+  }
+
+  /**
+   * Release DOM and event listeners
+   */
+  public destroy(): void {
+    this.nodes.wrapper.remove();
+
+    window.removeEventListener('scroll', this.handleWindowScroll);
+  }
+
+  /**
+   * Hide tooltip when page is scrolled
+   */
+  private handleWindowScroll = () => {
+    if (this.showed) {
+      this.hide(true);
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 {
   "name": "codex-tooltip",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple tooltips module",
   "main": "./dist/tooltip.js",
   "types": "./index.d.ts",

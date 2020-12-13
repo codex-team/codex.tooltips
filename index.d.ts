@@ -79,6 +79,11 @@ declare class Tooltip {
     content: TooltipContent,
     options?: TooltipOptions,
   ): void;
+
+  /**
+   * Release DOM and event listeners
+   */
+  public destroy(): void;
 }
 
 export default Tooltip;
