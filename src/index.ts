@@ -1,5 +1,5 @@
 import { TooltipContent, TooltipOptions } from '../types';
-export { TooltipContent, TooltipOptions };
+import '../styles/main.css';
 
 /**
  *
@@ -241,7 +241,7 @@ export default class Tooltip {
       return;
     }
 
-    const styles = require('../styles/main.css');
+    const styles = fetch('../styles/main.css');
     const tag = this.make('style', null, {
       textContent: styles.toString(),
       id,
