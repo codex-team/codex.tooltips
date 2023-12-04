@@ -36,7 +36,7 @@ class h {
    */
   show(t, e, i) {
     this.nodes.wrapper || this.prepare(), this.hidingTimeout && clearTimeout(this.hidingTimeout);
-    const o = Object.assign({
+    const s = Object.assign({
       placement: "bottom",
       marginTop: 0,
       marginLeft: 0,
@@ -45,30 +45,30 @@ class h {
       delay: 70,
       hidingDelay: 0
     }, i);
-    if (o.hidingDelay && (this.hidingDelay = o.hidingDelay), this.nodes.content.innerHTML = "", typeof e == "string")
+    if (s.hidingDelay && (this.hidingDelay = s.hidingDelay), this.nodes.content.innerHTML = "", typeof e == "string")
       this.nodes.content.appendChild(document.createTextNode(e));
     else if (e instanceof Node)
       this.nodes.content.appendChild(e);
     else
       throw Error("[CodeX Tooltip] Wrong type of «content» passed. It should be an instance of Node or String. But " + typeof e + " given.");
-    switch (this.nodes.wrapper.classList.remove(...Object.values(this.CSS.placement)), o.placement) {
+    switch (this.nodes.wrapper.classList.remove(...Object.values(this.CSS.placement)), s.placement) {
       case "top":
-        this.placeTop(t, o);
+        this.placeTop(t, s);
         break;
       case "left":
-        this.placeLeft(t, o);
+        this.placeLeft(t, s);
         break;
       case "right":
-        this.placeRight(t, o);
+        this.placeRight(t, s);
         break;
       case "bottom":
       default:
-        this.placeBottom(t, o);
+        this.placeBottom(t, s);
         break;
     }
-    o && o.delay ? this.showingTimeout = setTimeout(() => {
+    s && s.delay ? this.showingTimeout = setTimeout(() => {
       this.nodes.wrapper.classList.add(this.CSS.tooltipShown), this.showed = !0;
-    }, o.delay) : (this.nodes.wrapper.classList.add(this.CSS.tooltipShown), this.showed = !0);
+    }, s.delay) : (this.nodes.wrapper.classList.add(this.CSS.tooltipShown), this.showed = !0);
   }
   /**
    * Hide toolbox tooltip and clean content
@@ -116,7 +116,7 @@ class h {
     const t = "codex-tooltips-style";
     if (document.getElementById(t))
       return;
-    const e = require("../styles/main.css"), i = this.make("style", null, {
+    const e = fetch("../styles/main.css"), i = this.make("style", null, {
       textContent: e.toString(),
       id: t
     });
@@ -129,8 +129,8 @@ class h {
    * @param {TooltipOptions} showingOptions
    */
   placeBottom(t, e) {
-    const i = t.getBoundingClientRect(), s = i.left + t.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2, o = i.bottom + window.pageYOffset + this.offsetTop + e.marginTop;
-    this.applyPlacement("bottom", s, o);
+    const i = t.getBoundingClientRect(), o = i.left + t.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2, s = i.bottom + window.pageYOffset + this.offsetTop + e.marginTop;
+    this.applyPlacement("bottom", o, s);
   }
   /**
    * Calculates element coords and moves tooltip top of the element
@@ -139,8 +139,8 @@ class h {
    * @param {TooltipOptions} showingOptions
    */
   placeTop(t, e) {
-    const i = t.getBoundingClientRect(), s = i.left + t.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2, o = i.top + window.pageYOffset - this.nodes.wrapper.clientHeight - this.offsetTop;
-    this.applyPlacement("top", s, o);
+    const i = t.getBoundingClientRect(), o = i.left + t.clientWidth / 2 - this.nodes.wrapper.offsetWidth / 2, s = i.top + window.pageYOffset - this.nodes.wrapper.clientHeight - this.offsetTop;
+    this.applyPlacement("top", o, s);
   }
   /**
    * Calculates element coords and moves tooltip left of the element
@@ -149,8 +149,8 @@ class h {
    * @param {TooltipOptions} showingOptions
    */
   placeLeft(t, e) {
-    const i = t.getBoundingClientRect(), s = i.left - this.nodes.wrapper.offsetWidth - this.offsetLeft - e.marginLeft, o = i.top + window.pageYOffset + t.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2;
-    this.applyPlacement("left", s, o);
+    const i = t.getBoundingClientRect(), o = i.left - this.nodes.wrapper.offsetWidth - this.offsetLeft - e.marginLeft, s = i.top + window.pageYOffset + t.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2;
+    this.applyPlacement("left", o, s);
   }
   /**
    * Calculates element coords and moves tooltip right of the element
@@ -159,8 +159,8 @@ class h {
    * @param {TooltipOptions} showingOptions
    */
   placeRight(t, e) {
-    const i = t.getBoundingClientRect(), s = i.right + this.offsetRight + e.marginRight, o = i.top + window.pageYOffset + t.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2;
-    this.applyPlacement("right", s, o);
+    const i = t.getBoundingClientRect(), o = i.right + this.offsetRight + e.marginRight, s = i.top + window.pageYOffset + t.clientHeight / 2 - this.nodes.wrapper.offsetHeight / 2;
+    this.applyPlacement("right", o, s);
   }
   /**
    * Set wrapper position
@@ -177,11 +177,11 @@ class h {
    * @return {HTMLElement}
    */
   make(t, e = null, i = {}) {
-    const s = document.createElement(t);
-    Array.isArray(e) ? s.classList.add(...e) : e && s.classList.add(e);
-    for (const o in i)
-      i.hasOwnProperty(o) && (s[o] = i[o]);
-    return s;
+    const o = document.createElement(t);
+    Array.isArray(e) ? o.classList.add(...e) : e && o.classList.add(e);
+    for (const s in i)
+      i.hasOwnProperty(s) && (o[s] = i[s]);
+    return o;
   }
   /**
    * Append one or several elements to the parent
