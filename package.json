@@ -18,7 +18,7 @@
   "files": [
     "dist"
   ],
-  "types": "types/index.d.ts",
+  "types": "types/index.ts",
   "main": "./dist/tooltip.umd.js",
   "exports": {
     ".": {
