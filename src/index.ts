@@ -80,7 +80,6 @@ export default class Tooltip {
    * Module constructor
    */
   constructor() {
-    this.loadStyles();
     this.prepare();
 
     window.addEventListener('scroll', this.handleWindowScroll, {passive: true});
@@ -229,28 +228,6 @@ export default class Tooltip {
 
     this.append(this.nodes.wrapper, this.nodes.content);
     this.append(document.body, this.nodes.wrapper);
-  }
-
-  /**
-   * Append CSS file
-   */
-  private loadStyles(): void {
-    const id = 'codex-tooltips-style';
-
-    if (document.getElementById(id)) {
-      return;
-    }
-
-    const styles = fetch('../styles/main.css');
-    const tag = this.make('style', null, {
-      textContent: styles.toString(),
-      id,
-    });
-
-    /**
-     * Append styles at the top of HEAD tag
-     */
-    this.prepend(document.head, tag);
   }
 
   /**
