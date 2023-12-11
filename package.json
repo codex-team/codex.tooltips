@@ -18,12 +18,12 @@
   "files": [
     "dist"
   ],
-  "types": "types/index.ts",
-  "main": "./dist/tooltip.umd.js",
+  "types": "module",
+  "main": "./dist/tooltip.cjs",
   "exports": {
     ".": {
       "import": "./dist/tooltip.mjs",
-      "require": "./dist/tooltip.umd.js"
+      "require": "./dist/tooltip.cjs"
     }
   },
   "bugs": {
