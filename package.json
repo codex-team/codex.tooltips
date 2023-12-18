@@ -18,12 +18,13 @@
   "files": [
     "dist"
   ],
-  "types": "module",
-  "main": "./dist/tooltip.cjs",
+  "types": "./dist/src/index.d.ts",
+  "main": "./dist/tooltip.umd.js",
+  "module": "./dist/tooltip.mjs",
   "exports": {
     ".": {
       "import": "./dist/tooltip.mjs",
-      "require": "./dist/tooltip.cjs"
+      "require": "./dist/tooltip.umd.js"
     }
   },
   "bugs": {
@@ -44,8 +45,9 @@
     "ts-loader": "^5.3.3",
     "tslint": "^5.14.0",
     "tslint-loader": "^3.5.4",
-    "typescript": "^3.3.3333",
+    "typescript": "^5.3.3",
     "vite": "^5.0.4",
-    "vite-plugin-css-injected-by-js": "^3.3.0"
+    "vite-plugin-css-injected-by-js": "^3.3.0",
+    "vite-plugin-dts": "^3.6.4"
   }
 }
