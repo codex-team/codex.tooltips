@@ -1,4 +1,4 @@
-import { TooltipContent, TooltipOptions } from '../types';
+import { TooltipContent, TooltipOptions } from './types';
 import '../styles/main.css';
 
 /**

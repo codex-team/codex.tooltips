@@ -1,4 +1,4 @@
-import { TooltipContent, TooltipOptions } from '../types';
+import { TooltipContent, TooltipOptions } from './types';
 /**
  *
  * Tiny any beautiful tooltips module.
