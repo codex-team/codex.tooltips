@@ -20,7 +20,7 @@ npm install codex-tooltip
 Then, include tooltips to your script, create an instance and call hiding/showig methods:
 
 ```js
-import Tooltip from 'codex.tooltip';
+import Tooltip from 'codex.tooltips';
 
 const tooltip = new Tooltip();
 
