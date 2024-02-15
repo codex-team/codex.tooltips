@@ -1,4 +1,4 @@
-import { TooltipContent, TooltipOptions } from '../types';
+import { TooltipContent, TooltipOptions } from './types';
 /**
  *
  * Tiny any beautiful tooltips module.
@@ -84,10 +84,6 @@ export default class Tooltip {
      * Module Preparation method
      */
     private prepare;
-    /**
-     * Append CSS file
-     */
-    private loadStyles;
     /**
      * Calculates element coords and moves tooltip bottom of the element
      *
