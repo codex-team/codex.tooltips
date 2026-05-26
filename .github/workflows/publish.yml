@@ -1,0 +1,48 @@
+name: Publish package to npm
+
+on:
+  push:
+    # Publish when a tag like v1.2.3 is pushed
+    tags:
+      - 'v*'
+  # Allow manual runs from Actions UI
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
+
+      - name: Cache node modules and npm cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build (production)
+        run: yarn build:prod
+
+      - name: Publish to npm
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
+
+
