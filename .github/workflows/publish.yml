@@ -37,7 +37,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build (production)
-        run: yarn build:prod
+        run:  NODE_OPTIONS=--openssl-legacy-provider yarn build:prod
 
       - name: Publish to npm
         if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
