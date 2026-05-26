@@ -34,7 +34,10 @@ module.exports = (env, argv) => {
       filename: '[name].js',
       library: [ 'Tooltip' ],
       libraryTarget: 'umd',
-      libraryExport: 'default'
+      libraryExport: 'default',
+      // Use a safe universal global for UMD builds instead of hard-coded `window`.
+      // This makes the bundle work in browsers, web workers and Node-like environments.
+      globalObject: "typeof self !== 'undefined' ? self : typeof global !== 'undefined' ? global : this"
     },
 
     watchOptions: {
