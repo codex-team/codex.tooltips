@@ -78,9 +78,11 @@ export default class Tooltip {
 
   /**
    * Module constructor
+   *
+   * @param {string} nonce - The nonce to apply to the injected styles.
    */
-  constructor() {
-    this.loadStyles();
+  constructor(nonce?: string) {
+    this.loadStyles(nonce);
     this.prepare();
 
     window.addEventListener('scroll', this.handleWindowScroll, {passive: true});
@@ -233,8 +235,10 @@ export default class Tooltip {
 
   /**
    * Append CSS file
+   *
+   * @param {string} nonce - The nonce to apply to the injected styles.
    */
-  private loadStyles(): void {
+  private loadStyles(nonce?: string): void {
     const id = 'codex-tooltips-style';
 
     if (document.getElementById(id)) {
@@ -246,6 +250,11 @@ export default class Tooltip {
       textContent: styles.toString(),
       id,
     });
+
+    // Apply nonce to injected styles.
+    if (nonce) {
+      tag.setAttribute('nonce', nonce);
+    }
 
     /**
      * Append styles at the top of HEAD tag
