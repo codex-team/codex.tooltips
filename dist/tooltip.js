@@ -1,7 +1,7 @@
 /*!
  * CodeX.Tooltips
  * 
- * @version 1.0.6
+ * @version 1.1.0
  * 
  * @licence MIT
  * @author CodeX <https://codex.so>
