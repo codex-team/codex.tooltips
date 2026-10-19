@@ -77,13 +77,28 @@ export default class Tooltip {
   private hidingTimeout;
 
   /**
-   * Module constructor
+   * How many milliseconds to keep the element after hiding, so the hiding transition can play
+   */
+  private releaseDelay: number = 100;
+
+  /**
+   * Store timeout before releasing the element and the scroll listener
+   */
+  private releaseTimeout;
+
+  /**
+   * Whether the window scroll listener is registered
+   */
+  private isListening: boolean = false;
+
+  /**
+   * Module constructor.
+   *
+   * Nothing is added to the page until the tooltip is shown: the element and the window scroll
+   * listener only exist while the tooltip is visible, so a hidden tooltip leaves nothing behind
    */
   constructor() {
     this.loadStyles();
-    this.prepare();
-
-    window.addEventListener('scroll', this.handleWindowScroll, {passive: true});
   }
 
   /**
@@ -97,6 +112,9 @@ export default class Tooltip {
     if (!this.nodes.wrapper) {
       this.prepare();
     }
+
+    this.cancelRelease();
+    this.attach();
 
     if (this.hidingTimeout) {
       clearTimeout(this.hidingTimeout);
@@ -165,6 +183,13 @@ export default class Tooltip {
    * @param {boolean} skipDelay - forces hiding immediately
    */
   public hide(skipDelay: boolean = false): void {
+    /**
+     * Never shown, or already released: there is nothing to hide
+     */
+    if (!this.nodes.wrapper || !this.nodes.wrapper.isConnected) {
+      return;
+    }
+
     if (this.hidingDelay && !skipDelay) {
       // debounce
       if (this.hidingTimeout) {
@@ -184,6 +209,8 @@ export default class Tooltip {
     if (this.showingTimeout) {
       clearTimeout(this.showingTimeout);
     }
+
+    this.scheduleRelease();
   }
 
   /**
@@ -203,12 +230,15 @@ export default class Tooltip {
   }
 
   /**
-   * Release DOM and event listeners
+   * Release DOM, event listeners and pending timers. The tooltip can still be shown afterwards
    */
   public destroy(): void {
-    this.nodes.wrapper.remove();
+    clearTimeout(this.showingTimeout);
+    clearTimeout(this.hidingTimeout);
+    this.cancelRelease();
 
-    window.removeEventListener('scroll', this.handleWindowScroll);
+    this.showed = false;
+    this.release();
   }
 
   /**
@@ -228,7 +258,58 @@ export default class Tooltip {
     this.nodes.content = this.make('div', this.CSS.tooltipContent);
 
     this.append(this.nodes.wrapper, this.nodes.content);
-    this.append(document.body, this.nodes.wrapper);
+  }
+
+  /**
+   * Puts the element on the page and starts hiding on scroll, unless that's already done
+   */
+  private attach(): void {
+    if (!this.nodes.wrapper.isConnected) {
+      this.append(document.body, this.nodes.wrapper);
+    }
+
+    if (!this.isListening) {
+      window.addEventListener('scroll', this.handleWindowScroll, {passive: true});
+      this.isListening = true;
+    }
+  }
+
+  /**
+   * Releases the element after the hiding transition has had time to play
+   */
+  private scheduleRelease(): void {
+    this.cancelRelease();
+
+    this.releaseTimeout = setTimeout(() => {
+      this.releaseTimeout = null;
+      this.release();
+    }, this.releaseDelay);
+  }
+
+  /**
+   * Cancels a scheduled release, when the tooltip is shown again before it happens
+   */
+  private cancelRelease(): void {
+    if (this.releaseTimeout) {
+      clearTimeout(this.releaseTimeout);
+      this.releaseTimeout = null;
+    }
+  }
+
+  /**
+   * Takes the element off the page, stops listening for scroll and drops the last content,
+   * so a hidden tooltip keeps nothing alive
+   */
+  private release(): void {
+    if (this.nodes.wrapper) {
+      this.nodes.wrapper.remove();
+      this.nodes.content.innerHTML = '';
+    }
+
+    if (this.isListening) {
+      window.removeEventListener('scroll', this.handleWindowScroll);
+      this.isListening = false;
+    }
   }
 
   /**

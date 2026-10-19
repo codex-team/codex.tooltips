@@ -49,7 +49,22 @@ export default class Tooltip {
      */
     private hidingTimeout;
     /**
-     * Module constructor
+     * How many milliseconds to keep the element after hiding, so the hiding transition can play
+     */
+    private releaseDelay;
+    /**
+     * Store timeout before releasing the element and the scroll listener
+     */
+    private releaseTimeout;
+    /**
+     * Whether the window scroll listener is registered
+     */
+    private isListening;
+    /**
+     * Module constructor.
+     *
+     * Nothing is added to the page until the tooltip is shown: the element and the window scroll
+     * listener only exist while the tooltip is visible, so a hidden tooltip leaves nothing behind
      */
     constructor();
     /**
@@ -74,7 +89,7 @@ export default class Tooltip {
      */
     onHover(element: any, content: any, options: any): void;
     /**
-     * Release DOM and event listeners
+     * Release DOM, event listeners and pending timers. The tooltip can still be shown afterwards
      */
     destroy(): void;
     /**
@@ -85,6 +100,23 @@ export default class Tooltip {
      * Module Preparation method
      */
     private prepare;
+    /**
+     * Puts the element on the page and starts hiding on scroll, unless that's already done
+     */
+    private attach;
+    /**
+     * Releases the element after the hiding transition has had time to play
+     */
+    private scheduleRelease;
+    /**
+     * Cancels a scheduled release, when the tooltip is shown again before it happens
+     */
+    private cancelRelease;
+    /**
+     * Takes the element off the page, stops listening for scroll and drops the last content,
+     * so a hidden tooltip keeps nothing alive
+     */
+    private release;
     /**
      * Append CSS file
      */

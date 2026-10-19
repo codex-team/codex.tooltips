@@ -6,5 +6,7 @@
     "declarationDir": "./dist",
     "moduleResolution": "node", // This resolution strategy attempts to mimic the Node.js module resolution mechanism at runtime
     "lib": ["dom", "es2017", "es2018"]
-  }
+  },
+  // Tests run under Vitest, which type-checks them itself; the library build only covers the source
+  "exclude": ["node_modules", "dist", "test"]
 }
